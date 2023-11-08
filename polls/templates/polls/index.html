@@ -1,9 +1,49 @@
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-    <li><a href={% url 'polls:detail' question.id %}>{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        li a {
+            text-decoration: none;
+            color: #333;
+        }
+        .no-polls {
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>원하는 직종을 입력해주세요</h1>
+
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+            {% if question.url %}
+                <li><a href="{{ question.url }}">{{ question.question_text }}</a></li>
+            {% else %}
+                <li>{{ question.question_text }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-polls">No polls are available.</p>
+    {% endif %}
+</body>
+</html>
