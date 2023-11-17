@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('polls/', include('polls.urls')),       #url을 parsing 해서 plls/ 에서 polls.url 파일로 감
+    path('polls/', include('polls.urls')),       #url을 parsing 해서 polls/ 에서 polls.url 파일로 감
     path('admin/', admin.site.urls),
 ]

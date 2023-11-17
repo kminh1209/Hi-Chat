@@ -14,6 +14,7 @@ import json
 import os
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
+import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,6 +37,18 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 
 
+#환경변수 사용을 위한 코드
+# 환경변수를 불러올 수 있는 상태로 설정
+env = environ.Env(DEBUG=(bool, True))
+
+# 읽어올 환경 변수 파일을 지정
+environ.Env.read_env(
+  env_file = os.path.join(BASE_DIR, '.env')
+)
+
+# 설정한 변수를 읽어옴
+API_KEY = env('API_KEY')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -53,6 +66,8 @@ ALLOWED_HOSTS = ['*'] or ['.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
+    'GPT',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
