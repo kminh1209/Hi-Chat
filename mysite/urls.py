@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('polls/', include('polls.urls')),       #url을 parsing 해서 polls/ 에서 polls.url 파일로 감
+    path('GPT/', include('GPT.urls')),          # 개발서버/GPT를 입력받으면 GPT/urls.py로 넘어감
     path('admin/', admin.site.urls),
 ]
