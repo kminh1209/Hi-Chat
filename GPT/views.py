@@ -22,6 +22,11 @@ def products(request):
         'pageNo': '1'
     }
     response = requests.get(url, params=params)
-    products_data = response.json()['result']['baseList']
-    
+    response_data = response.json()
+
+    if 'result' in response_data:
+        products_data = response_data['result'].get('baseList', [])
+    else:
+        products_data = []
+
     return Response(products_data)

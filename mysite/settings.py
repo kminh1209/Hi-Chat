@@ -57,7 +57,7 @@ API_KEY = env('API_KEY')
 # SECRET_KEY = 'django-insecure-k+#fg4e0&i@)a(&!j1@^f&9hpx#(1(%%_mr(_22__2uiisoapb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*'] or ['.pythonanywhere.com'] 
 
@@ -67,6 +67,7 @@ ALLOWED_HOSTS = ['*'] or ['.pythonanywhere.com']
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'GPT',
+    'Question',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
