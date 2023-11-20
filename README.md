@@ -7,7 +7,7 @@
   
   
 
-### TeamLeader : [강민혁](https://github.com/kminh1209) -> Main Coder
+### TeamLeader : [강민혁](https://github.com/kminh1209) (Main Coder)
 ### Coder1: [박세영](https://github.com/spy6940)
 ### Coder2: [임지성](https://github.com/jiseong3030)
 ### Document : 이나경
