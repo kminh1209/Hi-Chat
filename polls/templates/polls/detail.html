@@ -1,7 +1,7 @@
-{% if question.url %}
+{% comment %} {% if question.url %}
 <h1><a href="{{ question.url }}">{{ question.question_text }}</a></h1>
 {% else %}
 <h1>{{ question.question_text }}</h1>
 {% endif %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} {% endcomment %}
