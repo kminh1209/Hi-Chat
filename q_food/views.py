@@ -13,5 +13,5 @@ def answer(request, question_id):
     if request.method == 'POST':
         answer_text = request.POST['answer_text']
         Answer.objects.create(question=question, answer_text=answer_text)
-        return HttpResponseRedirect(reverse('Question:index'))
-    return render(request, 'Question/answer.html', {'question': question})
+        return HttpResponseRedirect(reverse('q_food:index'))
+    return render(request, 'q_food/answer.html', {'question': question})
