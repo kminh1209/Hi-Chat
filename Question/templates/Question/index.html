@@ -38,33 +38,20 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="mt-5 mb-4"><i class="fas fa-pen"></i> About U</h1>
+  <div class="container">
+      <h1 class="mt-5 mb-4"><i class="fas fa-pen"></i> About U</h1>
 
-        <form>
-            <div class="question">
-                <label class="fw-bold" for="q1">질문 1: 자신이 지원하고자 하는 직무를 입력해주세요.</label><br>
-                <textarea class="form-control" id="q1" name="q1" rows="4"></textarea>
-            </div>
+      <form>
+          {% for question in questions %}
+          <div class="question">
+              <label class="fw-bold" for="{{ question.id }}">{{ question.question_text }}</label><br>
+              <textarea class="form-control" id="{{ question.id }}" name="{{ question.id }}" rows="4"></textarea>
+          </div>
+          {% endfor %}
 
-            <div class="question">
-                <label class="fw-bold" for="q2">질문 2: 협업을 했던 경험이 있다면 경험에 대해 자세히 작성해주세요. 작성 시 당시 협업 과정에서 느꼈던 어려움이나 갈등상황에 대해 자세히 작성해주세요. </label><br>
-                <textarea class="form-control" id="q2" name="q2" rows="4"></textarea>
-            </div>
-
-            <div class="question">
-                <label class="fw-bold" for="q3">질문 3: 자신이 생각하는 자신의 인생의 가치관을 작성해주세요.</label><br>
-                <textarea class="form-control" id="q3" name="q3" rows="4"></textarea>
-            </div>
-
-            <div class="question">
-                <label class="fw-bold" for="q4">질문 4: 자신이 생각하는 강점과 약점을 작성해주세요.</label><br>
-                <textarea class="form-control" id="q4" name="q4" rows="4"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-submit"><i class="fas fa-check"></i> 제출</button>
-        </form>
-    </div>
+          <button type="submit" class="btn btn-primary btn-submit"><i class="fas fa-check"></i> 제출</button>
+      </form>
+  </div>
 </body>
 
 </html>
