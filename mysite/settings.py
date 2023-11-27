@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'GPT',
     'Question',
+    'q_food',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
