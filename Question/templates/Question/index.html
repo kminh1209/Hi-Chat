@@ -38,20 +38,20 @@
 </head>
 
 <body>
-  <div class="container">
-      <h1 class="mt-5 mb-4"><i class="fas fa-pen"></i> About U</h1>
+    <div class="container">
+        <h1 class="mt-5 mb-4"><i class="fas fa-pen"></i> About U</h1>
 
-      <form>
-          {% for question in questions %}
-          <div class="question">
-              <label class="fw-bold" for="{{ question.id }}">{{ question.question_text }}</label><br>
-              <textarea class="form-control" id="{{ question.id }}" name="{{ question.id }}" rows="4"></textarea>
-          </div>
-          {% endfor %}
-
-          <button type="submit" class="btn btn-primary btn-submit"><i class="fas fa-check"></i> 제출</button>
-      </form>
-  </div>
+        <form method="post" action="{% url 'Question:index' %}">
+            {% csrf_token %}
+            {% for question in questions %}
+                <div class="question">
+                    <label class="fw-bold" for="answer_{{ question.id }}">{{ question.question_text }}</label><br>
+                    <textarea class="form-control" id="answer_{{ question.id }}" name="answer_{{ question.id }}" rows="4"></textarea>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary btn-submit"><i class="fas fa-check"></i> 제출</button>
+        </form>
+    </div>
 </body>
 
 </html>

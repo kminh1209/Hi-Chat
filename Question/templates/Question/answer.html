@@ -1,6 +1,0 @@
-<h2>{{ question.question_text }}</h2>
-<form method="post" action="{% url 'Question:answer' question.id %}">
-  {% csrf_token %}
-  <textarea name="answer_text"></textarea>
-  <input type="submit" value="Submit Answer">
-</form>
