@@ -28,3 +28,10 @@ def index(request): # 여러 질문에 대한 답변을 한 번에 입력받아 
 
     return render(request, 'q_food/index.html', {'questions': questions})
 
+# DB 삭제를 위한 함수
+# def delete_answers(request):
+#     if request.method == 'POST':
+#         # 사용자 입력 받은 정보를 데이터베이스에서 삭제
+#         Answer.objects.all().delete()
+
+#     return redirect('q_food:index')  # 삭제 후 index 페이지로 리디렉션

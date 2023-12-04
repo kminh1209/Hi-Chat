@@ -50,6 +50,13 @@
             {% endfor %}
             <button type="submit" class="btn btn-primary btn-submit"><i class="fas fa-check"></i> 제출</button>
         </form>
+        
+        
+        <!--코드 삭제를 위한 form-->
+        {% comment %} <form method="post" action="{% url 'q_food:delete_answers' %}">
+            {% csrf_token %}
+            <button type="submit">삭제</button>
+        </form> {% endcomment %}
     </div>
 </body>
 
