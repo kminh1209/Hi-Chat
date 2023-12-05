@@ -17,7 +17,7 @@ class OpenAIGpt:
       model="text-davinci-003",
       prompt=f"{text}",
       temperature=args.temperature,
-      max_tokens=100,
+      max_tokens=100,      # 질문 길이 ( 보통 100자 = 토큰 200개)
       top_p=1,
       frequency_penalty=0.0,
       presence_penalty=0.0,
