@@ -1,32 +1,37 @@
-# 데이터베이스에서 객체를 가져오거나, 존재하지 않을 경우 404 에러를 반환
-from django.shortcuts import get_object_or_404, get_list_or_404
-# api_view 데코레이터를 import, 데코레이터:함수 기반의 뷰를 API 뷰로 변환해줌
-from rest_framework.decorators import api_view
-# API 응답을 생성하는데 사용됨
-from rest_framework.response import Response
-# HTTP 상태 코드를 제공
-from rest_framework import status
-# Django 프로젝트의 설정을 관리하는데 사용됨
-from django.conf import settings
-import requests, json
+import os
+import openai
+import argparse
+from dotenv import load_dotenv
 
-API_KEY = settings.API_KEY #외부 API에 대한 인증
 
-# @api_view 데코레이터를 적용하여 GET 메서드만 허용하는 API 뷰로 설정
-@api_view(['GET'])  
-def products(request):
-    url = 'http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json'
-    params = {
-        'auth': API_KEY,
-        'topFinGrpNo': '020000',
-        'pageNo': '1'
-    }
-    response = requests.get(url, params=params)
-    response_data = response.json()
+class OpenAIGpt:
+  def __init__(spyelf):
+    load_dotenv()    
 
-    if 'result' in response_data:
-        products_data = response_data['result'].get('baseList', [])
-    else:
-        products_data = []
+  def run(self, args):
+    body = input("body : ")
+    question = input("Question : ")
+    text = f"{body} \n\nQ: {question}\nA:"
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    response = openai.Completion.create(
+      model="text-davinci-003",
+      prompt=f"{text}",
+      temperature=args.temperature,
+      max_tokens=100,      # 질문 길이 ( 보통 100자 = 토큰 200개)
+      top_p=1,
+      frequency_penalty=0.0,
+      presence_penalty=0.0,
+      stop=["\n"]
+    )
+    print(response)
+    print(response.choices[0].text.strip())
 
-    return Response(products_data)
+
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+  # python gpt3.py --temperature 0.3
+  parser.add_argument('--temperature', default=0.3)
+
+  args = parser.parse_args()
+  openai_gpt = OpenAIGpt()
+  openai_gpt.run(args)
