@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
+import os
+import openai
+import argparse
+from dotenv import load_dotenv
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Question, Answer
