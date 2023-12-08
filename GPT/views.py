@@ -12,9 +12,9 @@ class OpenAIGpt:
     body = input("body : ")
     question = input("Question : ")
     text = f"{body} \n\nQ: {question}\nA:"
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.api_key = os.getenv("API_KEY")
     response = openai.Completion.create(
-      model="text-davinci-003",
+      model="gpt-3.5-turbo-instruct",
       prompt=f"{text}",
       temperature=args.temperature,
       max_tokens=100,      # 질문 길이 ( 보통 100자 = 토큰 200개)
