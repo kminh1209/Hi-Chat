@@ -17,3 +17,4 @@ class INFORMATION_A(models.Model):
 
     def __str__(self):
         return f"Answer for {self.question.question_text}"
+

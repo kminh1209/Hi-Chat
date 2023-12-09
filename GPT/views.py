@@ -1,9 +1,10 @@
 import os
 import openai
 import argparse
+from django.http import JsonResponse
 from dotenv import load_dotenv
 from django.shortcuts import render
-from q_food.views import Answer as QFoodAnswer
+from q_food.models import Question, Answer
 
 
 
@@ -12,8 +13,8 @@ from q_food.views import Answer as QFoodAnswer
 #     load_dotenv()    
 
 #   def run(self, args):
-#     body = input("body : ")
-#     question = input("Question : ")
+#     body = input("정보 : ")
+#     question = input("요구 : ")
 #     text = f"{body} \n\nQ: {question}\nA:"
 #     openai.api_key = os.getenv("API_KEY")
 #     response = openai.Completion.create(
@@ -39,24 +40,44 @@ from q_food.views import Answer as QFoodAnswer
 #   openai_gpt = OpenAIGpt()
 #   openai_gpt.run(args)
 
+def data_b():
+    # Question 모델에서 데이터를 가져와서 질문에 대한 답변을 얻습니다.
+    try:
+        # 예시로 가장 최근의 데이터를 가져오는 방법입니다.
+        latest_question = Question.objects.latest('id')
+        answer = Answer.objects.get(question=latest_question)
+        answer_text = answer.answer_text
+    except (Question.DoesNotExist, Answer.DoesNotExist):
+        answer_text = "No answer found."
 
-def product_print():
-  # q_food 앱의 Answer 모델에서 데이터 가져오기
-    q_food_answers = QFoodAnswer.objects.all()
+    return answer_text
 
-    # 가져온 데이터를 출력하거나 다른 작업 수행
-    for answer in q_food_answers:
-        print(answer.answer_text)  
-        # 예시로 answer_text를 출력하는데, 필드는 실제 모델에 맞게 변경하세요.
+def some_view(request):
+    answer_text = data_b()
 
+    # 예시로 가장 최근의 질문을 가져오는 방법입니다.
+    try:
+        latest_question = Question.objects.latest('id')
+        question_text = latest_question.question_text
+    except Question.DoesNotExist:
+        question_text = "No question found."
 
-def your_view(request):
-    # 데이터베이스에서 데이터 가져오기
-    data_from_database = q_food.objects.all()
+    # 템플릿 렌더링
+    return render(request, 'GPT/index.html', {'question_text': question_text, 'answer_text': answer_text})
 
-    # 가져온 데이터를 출력하거나 다른 작업 수행
-    for item in data_from_database:
-        print(item.q_food)  # 필드 이름은 실제 모델에 맞게 변경해야 합니다.
+# def some_view(request):
+#     # 예시로 모델 인스턴스를 가져옴
+#     info_q_instance = INFORMATION_Q.objects.get(pk=1)
+#     info_a_instance = INFORMATION_A.objects.get(pk=1)
 
-    # 원하는 렌더링 및 템플릿 로직 수행
-    #return render(request, 'your_template.html', {'data_from_database': data_from_database})
+#     # to_dict 메서드를 사용하여 딕셔너리로 변환
+#     info_q_dict = info_q_instance.to_dict()
+#     info_a_dict = info_a_instance.to_dict()
+
+#     # JSON 응답 생성
+#     response_data = {
+#         'info_q': info_q_dict,
+#         'info_a': info_a_dict,
+#     }
+
+#     return JsonResponse(response_data)
