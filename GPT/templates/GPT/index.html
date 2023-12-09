@@ -3,15 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question and Answer</title>
+    <title>Hi-Chat Output</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        pre {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
-    <h1>질문과 답변</h1>
-    <hr>
-    {% for data in all_data_list %}
-        <p>질문: {{ data.question_text }}</p>
-        <p>답변: {{ data.answer_text }}</p>
-        <hr>
-    {% endfor %}
+    <h1>OpenAIGpt API Output</h1>
+    
+    <pre>{{ api_output }}</pre>
 </body>
 </html>
