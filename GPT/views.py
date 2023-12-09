@@ -6,6 +6,31 @@ from dotenv import load_dotenv
 from django.shortcuts import render
 from q_food.models import Question, Answer
 
+def all_data():
+    # Question 모델에 대한 모든 데이터를 가져옵니다.
+    questions = Question.objects.all()
+
+    data = []
+    for question in questions:
+        # Question과 연결된 모든 Answer를 가져옵니다.
+        answers = Answer.objects.filter(question=question)
+
+        # Answer 객체가 하나 이상 있는 경우, 가장 최근의 Answer를 사용합니다.
+        answer_text = answers.last().answer_text if answers else "No answer found."
+
+        data.append({
+            'question_text': question.question_text,
+            'answer_text': answer_text
+        })
+
+    return data
+
+def some_view(request): #특정 URL에 대한 요청이 들어왔을 때 실행되어 사용자에게 데이터를 제공하는 역할
+    all_data_list = all_data()
+
+    # 템플릿 렌더링
+    return render(request, 'GPT/index.html', {'all_data_list': all_data_list})
+
 
 
 # class OpenAIGpt:
@@ -40,44 +65,3 @@ from q_food.models import Question, Answer
 #   openai_gpt = OpenAIGpt()
 #   openai_gpt.run(args)
 
-def data_b():
-    # Question 모델에서 데이터를 가져와서 질문에 대한 답변을 얻습니다.
-    try:
-        # 예시로 가장 최근의 데이터를 가져오는 방법입니다.
-        latest_question = Question.objects.latest('id')
-        answer = Answer.objects.get(question=latest_question)
-        answer_text = answer.answer_text
-    except (Question.DoesNotExist, Answer.DoesNotExist):
-        answer_text = "No answer found."
-
-    return answer_text
-
-def some_view(request):
-    answer_text = data_b()
-
-    # 예시로 가장 최근의 질문을 가져오는 방법입니다.
-    try:
-        latest_question = Question.objects.latest('id')
-        question_text = latest_question.question_text
-    except Question.DoesNotExist:
-        question_text = "No question found."
-
-    # 템플릿 렌더링
-    return render(request, 'GPT/index.html', {'question_text': question_text, 'answer_text': answer_text})
-
-# def some_view(request):
-#     # 예시로 모델 인스턴스를 가져옴
-#     info_q_instance = INFORMATION_Q.objects.get(pk=1)
-#     info_a_instance = INFORMATION_A.objects.get(pk=1)
-
-#     # to_dict 메서드를 사용하여 딕셔너리로 변환
-#     info_q_dict = info_q_instance.to_dict()
-#     info_a_dict = info_a_instance.to_dict()
-
-#     # JSON 응답 생성
-#     response_data = {
-#         'info_q': info_q_dict,
-#         'info_a': info_a_dict,
-#     }
-
-#     return JsonResponse(response_data)
