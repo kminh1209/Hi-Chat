@@ -11,3 +11,7 @@
 ### Coder1: [박세영](https://github.com/spy6940)
 ### Coder2: [임지성](https://github.com/jiseong3030)
 ### Document : 이나경
+
+
+
+requirements.txt 파일 내용 install 해야함
