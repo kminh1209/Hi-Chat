@@ -8,7 +8,7 @@
   
   
 
-[강민혁](https://github.com/kminh1209) (Main Coder)
+### [강민혁](https://github.com/kminh1209) (Main Coder)
 
 
 
